@@ -7,7 +7,6 @@ describe 'GetSubcriptions', ->
       list: sinon.stub()
 
     @sut = new GetSubcriptions
-      whitelistManager: @whitelistManager
       subscriptionManager: @subscriptionManager
 
   describe '->run', ->

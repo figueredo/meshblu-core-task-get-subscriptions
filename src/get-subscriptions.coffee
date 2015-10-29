@@ -2,9 +2,8 @@ SubsriptionManager = require 'meshblu-core-manager-subscriptions'
 http               = require 'http'
 
 class GetSubcriptions
-  constructor: (dependencies={}) ->
-    {@database, @subscriptionManager} = dependencies
-    @subscriptionManager ?= new SubsriptionManager database: @database
+  constructor: ({@datastore, @subscriptionManager}) ->
+    @subscriptionManager ?= new SubsriptionManager datastore: @datastore
 
   run: (job, callback) =>
     {toUuid, responseId} = job.metadata
