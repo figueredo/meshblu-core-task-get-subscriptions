@@ -3,9 +3,6 @@ GetSubcriptions = require '../src/get-subscriptions'
 
 describe 'GetSubcriptions', ->
   beforeEach ->
-    @whitelistManager =
-      canConfigure: sinon.stub()
-
     @subscriptionManager =
       list: sinon.stub()
 
@@ -16,7 +13,6 @@ describe 'GetSubcriptions', ->
   describe '->run', ->
     describe 'when called with a valid job', ->
       beforeEach (done) ->
-        @whitelistManager.canConfigure.yields null, true
         @subscriptionManager.list.yields null, [
           {subscriberUuid: 'bright-green', emitterUuid: 'purple-blue', type: 'blue'}
           {subscriberUuid: 'bright-green', emitterUuid: 'purple', type: 'blue-purple'}
@@ -48,7 +44,6 @@ describe 'GetSubcriptions', ->
 
     describe 'when called with a different valid job', ->
       beforeEach (done) ->
-        @whitelistManager.canConfigure.yields null, true
         @subscriptionManager.list.yields null, [
           {subscriberUuid: 'hot-yellow', emitterUuid: 'kinda-blue', type: 'green-and-something-else'}
           {subscriberUuid: 'hot-yellow', emitterUuid: 'kinda-green', type: 'blue-and-something-else'}
@@ -78,53 +73,8 @@ describe 'GetSubcriptions', ->
           {subscriberUuid: 'hot-yellow', emitterUuid: 'kinda-green', type: 'blue-and-something-else'}
         ]
 
-    describe 'when called with a job that with a device that cannot be configured', ->
-      beforeEach (done) ->
-        @whitelistManager.canConfigure.yields null, false
-        job =
-          metadata:
-            auth:
-              uuid: 'puke-green'
-              token: 'blue-lime-green'
-            toUuid: 'super-purple'
-            fromUuid: 'not-so-super-purple'
-            responseId: 'purple-green'
-        @sut.run job, (error, @newJob) => done error
-
-      it 'should get have the responseId', ->
-        expect(@newJob.metadata.responseId).to.equal 'purple-green'
-
-      it 'should get have the status code of 403', ->
-        expect(@newJob.metadata.code).to.equal 403
-
-      it 'should get have the status of Forbidden', ->
-        expect(@newJob.metadata.status).to.equal http.STATUS_CODES[403]
-
-    describe 'when called and the canConfigure yields an error', ->
-      beforeEach (done) ->
-        @whitelistManager.canConfigure.yields new Error "black-n-black"
-        job =
-          metadata:
-            auth:
-              uuid: 'puke-green'
-              token: 'blue-lime-green'
-            toUuid: 'green-bomb'
-            fromUuid: 'green-safe'
-            responseId: 'purple-green'
-        @sut.run job, (error, @newJob) => done error
-
-      it 'should get have the responseId', ->
-        expect(@newJob.metadata.responseId).to.equal 'purple-green'
-
-      it 'should get have the status code of 403', ->
-        expect(@newJob.metadata.code).to.equal 500
-
-      it 'should get have the status of Forbidden', ->
-        expect(@newJob.metadata.status).to.equal http.STATUS_CODES[500]
-
     describe 'when called and the subscription list yields an error', ->
       beforeEach (done) ->
-        @whitelistManager.canConfigure.yields null, true
         @subscriptionManager.list.yields new Error("dark shadow grey")
         job =
           metadata:

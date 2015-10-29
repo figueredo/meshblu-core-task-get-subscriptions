@@ -1,21 +1,16 @@
-SubsriptionManager = require 'meshblu-core-manager-whitelist'
-WhitelistManager   = require 'meshblu-core-manager-subscriptions'
+SubsriptionManager = require 'meshblu-core-manager-subscriptions'
 http               = require 'http'
 
 class GetSubcriptions
   constructor: (dependencies={}) ->
-    {@database, @whitelistManager, @subscriptionManager} = dependencies
-    @whitelistManager ?= new WhitelistManager database: @database
+    {@database, @subscriptionManager} = dependencies
     @subscriptionManager ?= new SubsriptionManager database: @database
 
   run: (job, callback) =>
-    {toUuid, fromUuid, responseId} = job.metadata
-    @whitelistManager.canConfigure toUuid, fromUuid, (error, canConfigure) =>
+    {toUuid, responseId} = job.metadata
+    @subscriptionManager.list toUuid, (error, subsriptions) =>
       return @sendResponse responseId, 500, null, callback if error?
-      return @sendResponse responseId, 403, null, callback unless canConfigure
-      @subscriptionManager.list toUuid, (error, subsriptions) =>
-        return @sendResponse responseId, 500, null, callback if error?
-        @sendResponse responseId, 200, subsriptions, callback
+      @sendResponse responseId, 200, subsriptions, callback
 
   sendResponse: (responseId, code, data, callback) =>
     callback null,

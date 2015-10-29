@@ -1,6 +1,6 @@
 {
   "name": "meshblu-core-task-get-subscriptions",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Meshblu core task for getting subscriptions",
   "main": "index.js",
   "scripts": {
