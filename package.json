@@ -1,6 +1,6 @@
 {
   "name": "meshblu-core-task-get-subscriptions",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Meshblu core task for getting subscriptions",
   "main": "index.js",
   "scripts": {
@@ -35,7 +35,6 @@
     "debug": "^2.2.0",
     "lodash": "^3.10.1",
     "meshblu-core-manager-subscriptions": "^1.0.0",
-    "meshblu-core-manager-whitelist": "^1.0.2",
-    "meshblu-server": "^1.11.8"
+    "meshblu-core-manager-whitelist": "^1.0.2"
   }
 }
