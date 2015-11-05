@@ -5,7 +5,7 @@ class GetSubcriptions
   constructor: ({@datastore, @subscriptionManager}) ->
     @subscriptionManager ?= new SubsriptionManager datastore: @datastore
 
-  run: (job, callback) =>
+  do: (job, callback) =>
     {toUuid, responseId} = job.metadata
     @subscriptionManager.list toUuid, (error, subsriptions) =>
       return @sendResponse responseId, 500, null, callback if error?
