@@ -9,7 +9,7 @@ describe 'GetSubcriptions', ->
     @sut = new GetSubcriptions
       subscriptionManager: @subscriptionManager
 
-  describe '->run', ->
+  describe '->do', ->
     describe 'when called with a valid job', ->
       beforeEach (done) ->
         @subscriptionManager.list.yields null, [
@@ -24,7 +24,7 @@ describe 'GetSubcriptions', ->
             toUuid: 'bright-green'
             fromUuid: 'dim-green'
             responseId: 'yellow-green'
-        @sut.run job, (error, @newJob) => done error
+        @sut.do job, (error, @newJob) => done error
 
       it 'should get have the responseId', ->
         expect(@newJob.metadata.responseId).to.equal 'yellow-green'
@@ -55,7 +55,7 @@ describe 'GetSubcriptions', ->
             toUuid: 'hot-yellow'
             fromUuid: 'ugly-yellow'
             responseId: 'purple-green'
-        @sut.run job, (error, @newJob) => done error
+        @sut.do job, (error, @newJob) => done error
 
       it 'should get have the responseId', ->
         expect(@newJob.metadata.responseId).to.equal 'purple-green'
@@ -83,7 +83,7 @@ describe 'GetSubcriptions', ->
             toUuid: 'no bo blue'
             fromUuid: 'semi-black-almost-grey'
             responseId: 'i-wish-i-was-blue'
-        @sut.run job, (error, @newJob) => done error
+        @sut.do job, (error, @newJob) => done error
 
       it 'should get have the responseId', ->
         expect(@newJob.metadata.responseId).to.equal 'i-wish-i-was-blue'
