@@ -1,9 +1,9 @@
-SubsriptionManager = require 'meshblu-core-manager-subscriptions'
+SubscriptionManager = require 'meshblu-core-manager-subscriptions'
 http               = require 'http'
 
 class GetSubcriptions
   constructor: ({datastore, @subscriptionManager, uuidAliasResolver}) ->
-    @subscriptionManager ?= new SubsriptionManager {datastore, uuidAliasResolver}
+    @subscriptionManager ?= new SubscriptionManager {datastore, uuidAliasResolver}
 
   do: (job, callback) =>
     {toUuid, responseId} = job.metadata
