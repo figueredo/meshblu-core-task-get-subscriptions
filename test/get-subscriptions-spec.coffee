@@ -4,7 +4,7 @@ GetSubcriptions = require '../src/get-subscriptions'
 describe 'GetSubcriptions', ->
   beforeEach ->
     @subscriptionManager =
-      list: sinon.stub()
+      subscriberList: sinon.stub()
 
     @sut = new GetSubcriptions
       subscriptionManager: @subscriptionManager
@@ -12,7 +12,7 @@ describe 'GetSubcriptions', ->
   describe '->do', ->
     describe 'when called with a valid job', ->
       beforeEach (done) ->
-        @subscriptionManager.list.yields null, [
+        @subscriptionManager.subscriberList.yields null, [
           {subscriberUuid: 'bright-green', emitterUuid: 'purple-blue', type: 'blue'}
           {subscriberUuid: 'bright-green', emitterUuid: 'purple', type: 'blue-purple'}
         ]
@@ -43,7 +43,7 @@ describe 'GetSubcriptions', ->
 
     describe 'when called with a different valid job', ->
       beforeEach (done) ->
-        @subscriptionManager.list.yields null, [
+        @subscriptionManager.subscriberList.yields null, [
           {subscriberUuid: 'hot-yellow', emitterUuid: 'kinda-blue', type: 'green-and-something-else'}
           {subscriberUuid: 'hot-yellow', emitterUuid: 'kinda-green', type: 'blue-and-something-else'}
         ]
@@ -72,9 +72,9 @@ describe 'GetSubcriptions', ->
           {subscriberUuid: 'hot-yellow', emitterUuid: 'kinda-green', type: 'blue-and-something-else'}
         ]
 
-    describe 'when called and the subscription list yields an error', ->
+    describe 'when called and the subscription subscriberList yields an error', ->
       beforeEach (done) ->
-        @subscriptionManager.list.yields new Error("dark shadow grey")
+        @subscriptionManager.subscriberList.yields new Error("dark shadow grey")
         job =
           metadata:
             auth:
