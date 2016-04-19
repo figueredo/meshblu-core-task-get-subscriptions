@@ -1,5 +1,5 @@
 http                = require 'http'
-SubscriptionManager = require 'meshblu-core-manager-subscriptions'
+SubscriptionManager = require 'meshblu-core-manager-subscription'
 
 class GetSubcriptions
   constructor: ({datastore, @subscriptionManager, uuidAliasResolver}) ->
