@@ -7,7 +7,7 @@ class GetSubcriptions
 
   do: (job, callback) =>
     {toUuid, responseId} = job.metadata
-    @subscriptionManager.subscriberList toUuid, (error, data) =>
+    @subscriptionManager.subscriberList subscriberUuid: toUuid, (error, data) =>
       return @sendResponse responseId, 500, null, callback if error?
       @sendResponse responseId, 200, data, callback
 
