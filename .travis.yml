@@ -1,21 +1,6 @@
 language: node_js
 node_js:
-- '0.11'
-# addons:
-#   code_climate:
-#     repo_token: "<REPO TOKEN GOES HERE>"
-before_script:
-- npm install -g codeclimate-test-reporter
-after_script:
-- codeclimate-test-reporter < coverage/lcov.info
-deploy:
-  provider: npm
-  email: serveradmin@octoblu.com
-  api_key:
-    secure: otTHOHEviqsgjsLAxpi+elxt/cLusSlRszecR7FYwsYVTJn/tG4ea3DkJYyjILQcwPTaeTy9tEX7+NrnXqQcaOd2mNp6YIqmAhJBnoVXfTTusyzGi5Ptjs6heGq4uxB3FIzjTm6YftRtYxhz69UBn2Y428ewU1Vo5tutrxd6+EDmKOhQJJfc0N3xsXiyF9xtjijDtdhFvZpp4FYZZz74AWA7SRmG9jdXt/wo8AW0ifVwDi0SHHnvhq6S09gSkMPwMWDRlVM47B8teMS0WDKGpTYIeW6QKec8J/4wZoa6PGdN31XRxfmm6Fe6ORbGCmH92N9n4ttIR+ZjeYqmLavGT2dZd/MxNLFaBjmStC/iUwqrtyQCk2bn+blBuk6fKJCEMGvury3yflSSq4OnpMZmi5e7LaMtmoDgVGI85g9s1W0XJ3/5qurF3RAge2sADyIz+yC5a/UX7w4E1ToFIlRrBevlmji6VkiNciVrPdiIlcP7eXFKOho+HqpZYEMcSKguLYxzGnCcFtfU2HrFiHka5wFHq95b9Gtk+3mGagp4b/w12wyfyKv+FZgcTS/gP6sd3IQWp6NhiYQhyymPsXGtJwagQJZ5xS9NRlHTY7H47rFwJI585aQlDvFUALHm8xyCeEmbklEFdCGn1i26wLbtSLdX7kenpxfcrBsIMRNvX/4=
-  on:
-    tags: true
-    branches: true
+- '6'
 branches:
   only:
   - "/^v[0-9]/"
@@ -24,3 +9,11 @@ after_success:
 - npm run mocha:json
 - bash <(curl -s https://codecov.io/bash)
 - bash <(curl -s https://codecov.octoblu.com/bash)
+deploy:
+  provider: npm
+  email: serveradmin@octoblu.com
+  api_key:
+    secure: otTHOHEviqsgjsLAxpi+elxt/cLusSlRszecR7FYwsYVTJn/tG4ea3DkJYyjILQcwPTaeTy9tEX7+NrnXqQcaOd2mNp6YIqmAhJBnoVXfTTusyzGi5Ptjs6heGq4uxB3FIzjTm6YftRtYxhz69UBn2Y428ewU1Vo5tutrxd6+EDmKOhQJJfc0N3xsXiyF9xtjijDtdhFvZpp4FYZZz74AWA7SRmG9jdXt/wo8AW0ifVwDi0SHHnvhq6S09gSkMPwMWDRlVM47B8teMS0WDKGpTYIeW6QKec8J/4wZoa6PGdN31XRxfmm6Fe6ORbGCmH92N9n4ttIR+ZjeYqmLavGT2dZd/MxNLFaBjmStC/iUwqrtyQCk2bn+blBuk6fKJCEMGvury3yflSSq4OnpMZmi5e7LaMtmoDgVGI85g9s1W0XJ3/5qurF3RAge2sADyIz+yC5a/UX7w4E1ToFIlRrBevlmji6VkiNciVrPdiIlcP7eXFKOho+HqpZYEMcSKguLYxzGnCcFtfU2HrFiHka5wFHq95b9Gtk+3mGagp4b/w12wyfyKv+FZgcTS/gP6sd3IQWp6NhiYQhyymPsXGtJwagQJZ5xS9NRlHTY7H47rFwJI585aQlDvFUALHm8xyCeEmbklEFdCGn1i26wLbtSLdX7kenpxfcrBsIMRNvX/4=
+  on:
+    tags: true
+    branches: true

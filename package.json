@@ -1,6 +1,6 @@
 {
   "name": "meshblu-core-task-get-subscriptions",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "Meshblu core task for getting subscriptions",
   "main": "index.js",
   "scripts": {
@@ -26,18 +26,17 @@
   "devDependencies": {
     "chai": "^3.4.0",
     "coffee-script": "^1.10.0",
-    "mocha": "^2.3.3",
-    "mocha-multi": "^0.9.1",
+    "mocha": "^3.2.0",
+    "mocha-multi": "^0.10.0",
     "mocha-osx-reporter": "^0.1.2",
-    "nyc": "^8.3.0",
+    "nyc": "^10.0.0",
     "sinon": "^1.17.2",
     "sinon-chai": "^2.8.0"
   },
   "dependencies": {
     "coffee-script": "^1.10.0",
     "debug": "^2.2.0",
-    "lodash": "^3.10.1",
-    "meshblu-core-manager-subscription": "^3.2.1"
+    "meshblu-core-manager-subscription": "^4.0.0"
   },
   "nyc": {
     "cache": true,
